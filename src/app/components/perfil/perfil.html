@@ -1,0 +1,311 @@
+<button (click)="rutaPrincipal()" class="botonVolver">← Volver</button>
+
+<div class="pagina">
+
+  <div class="fila">
+
+    <div class="columna columnaPerfil">
+      <div class="tarjetaUsuario">
+        <div class="avatar">{{ inicial }}</div>
+        <div class="infoUsuario">
+          <p class="nombreUsuario">{{ usuario.nombre }} {{ usuario.apellidos }}</p>
+          <p class="contacto">{{ usuario.email }}</p>
+          <p class="contacto">{{ usuario.telefono }}</p>
+          <p class="fechaRegistro">Miembro desde {{ fechaRegistro }}</p>
+        </div>
+        <button class="botonEditar" (click)="prepararEditar()">✏️ Editar</button>
+      </div>
+
+      @if(formulario) {
+      <div class="formulario">
+        <label>Nombre:</label>
+        <input type="text" placeholder="Nombre" [(ngModel)]="usuarioEditado.nombre">
+        <label>Apellidos:</label>
+        <input type="text" placeholder="Apellidos" [(ngModel)]="usuarioEditado.apellidos">
+        <label>Teléfono:</label>
+        <input type="text" placeholder="Teléfono" [(ngModel)]="usuarioEditado.telefono">
+        @if(errorEditar) { <p class="mensajeError">{{ errorEditar }}</p> }
+        <button class="botonGuardar" (click)="editar()">Guardar cambios</button>
+      </div>
+      }
+      @if(exitoEditar) { <p class="mensajeExito">Perfil actualizado correctamente</p> }
+    </div>
+
+    <div class="columna columnaSeguridad">
+      <div class="seccion alturaCompleta">
+        <div class="cabeceraSeccion">
+          <h3 class="tituloSeccion">🔒 Seguridad</h3>
+          <button class="botonSecundario" (click)="formularioCambiarPassword = !formularioCambiarPassword">
+            {{ formularioCambiarPassword ? 'Cancelar' : 'Cambiar contraseña' }}
+          </button>
+        </div>
+
+        @if(!formularioCambiarPassword) {
+        <p class="textoPlaceholder">Gestiona tu contraseña y la seguridad de tu cuenta.</p>
+        }
+
+        @if(formularioCambiarPassword) {
+        <div class="formulario">
+          <label>Contraseña actual:</label>
+          <input type="password" placeholder="Contraseña actual" [(ngModel)]="passwordActual">
+          <label>Contraseña nueva:</label>
+          <input type="password" placeholder="Mínimo 8 caracteres" [(ngModel)]="passwordNueva">
+          <label>Repetir contraseña nueva:</label>
+          <input type="password" placeholder="Repite la contraseña" [(ngModel)]="passwordNueva2">
+          @if(errorPassword) { <p class="mensajeError">{{ errorPassword }}</p> }
+          <button class="botonGuardar" (click)="cambiarPassword()">Guardar contraseña</button>
+        </div>
+        }
+        @if(exitoPassword) { <p class="mensajeExito">Contraseña cambiada correctamente</p> }
+      </div>
+    </div>
+
+  </div>
+
+  <div class="fila filaDos">
+
+    <div class="columna columnaViviendas">
+      <div class="seccion">
+        <div class="cabeceraSeccion">
+          <h3 class="tituloSeccion">🏠 Mis viviendas</h3>
+          <button class="botonSecundario" (click)="abrirFormularioNueva()">
+            {{ formularioNueva ? 'Cancelar' : '+ Nueva' }}
+          </button>
+        </div>
+
+        @if(formularioNueva) {
+        <div class="formulario">
+          <label>Título:</label>
+          <input type="text" placeholder="Título" [(ngModel)]="nuevaVivienda.titulo">
+          <label>Descripción:</label>
+          <input type="text" placeholder="Descripción" [(ngModel)]="nuevaVivienda.descripcion">
+          <label>Dirección:</label>
+          <input type="text" placeholder="Dirección" [(ngModel)]="nuevaVivienda.direccion">
+          <label>Ciudad:</label>
+          <input type="text" placeholder="Ciudad" [(ngModel)]="nuevaVivienda.ciudad">
+          <label>País:</label>
+          <input type="text" placeholder="País" [(ngModel)]="nuevaVivienda.pais">
+          <label>Capacidad (máx. 20):</label>
+          <input type="number" placeholder="Capacidad" [(ngModel)]="nuevaVivienda.capacidad">
+          @if(nuevaVivienda.tipo !== 'INTERCAMBIO') {
+          <label>Precio por noche:</label>
+          <input type="number" placeholder="Precio" [(ngModel)]="nuevaVivienda.precioNoche">
+          }
+          <label>Tipo:</label>
+          <select [(ngModel)]="nuevaVivienda.tipo">
+            <option value="ALQUILER">Alquiler</option>
+            <option value="INTERCAMBIO">Intercambio</option>
+          </select>
+          @if(errorNueva) { <p class="mensajeError">{{ errorNueva }}</p> }
+          <button class="botonGuardar" (click)="crearVivienda()" [disabled]="cargandoNueva">
+            {{ cargandoNueva ? 'Creando...' : 'Crear vivienda' }}
+          </button>
+        </div>
+        }
+
+        @if(exitoEditarVivienda) { <p class="mensajeExito">Vivienda actualizada correctamente</p> }
+
+        @if(viviendas.length > 0) {
+        <div id="mapaPerfi" class="mapaViviendas"></div>
+        }
+
+        @if(viviendas.length > 0) {
+        @for(vivienda of viviendas; track vivienda.id) {
+        <div class="tarjetaVivienda">
+          <div class="cabeceraTarjeta">
+            <h3 class="tituloTarjeta">{{ vivienda.titulo }}</h3>
+            <div class="accionesTarjeta">
+              <button class="botonSecundario" (click)="prepararEditarVivienda(vivienda)">Editar</button>
+              <button class="botonSecundario" (click)="ActivaVivienda(vivienda)">
+                {{ vivienda.activa ? 'Desactivar' : 'Activar' }}
+              </button>
+              <button class="botonEliminar" (click)="eliminarVivienda(vivienda.id)">Eliminar</button>
+            </div>
+          </div>
+
+          @if(viviendaEditandoId !== vivienda.id) {
+          <div class="contenidoTarjeta">
+            <div class="campoInfo">
+              <label class="etiquetaInfo">Dirección</label>
+              <p class="valorInfo">{{ vivienda.direccion }}, {{ vivienda.ciudad }}</p>
+            </div>
+            <div class="campoInfo">
+              <label class="etiquetaInfo">Tipo</label>
+              <p class="valorInfo">{{ vivienda.tipo }}</p>
+            </div>
+            <div class="campoInfo">
+              <label class="etiquetaInfo">Capacidad</label>
+              <p class="valorInfo">{{ vivienda.capacidad }} personas</p>
+            </div>
+            @if(vivienda.tipo !== 'INTERCAMBIO') {
+            <div class="campoInfo">
+              <label class="etiquetaInfo">Precio/noche</label>
+              <p class="valorInfo">{{ vivienda.precioNoche ? (vivienda.precioNoche + ' €') : '—' }}</p>
+            </div>
+            }
+            <div class="campoInfo">
+              <label class="etiquetaInfo">Puntuación</label>
+              <p class="valorInfo">{{ vivienda.puntuacionMedia ? (vivienda.puntuacionMedia + ' / 5 ⭐') : 'Sin valoraciones' }}</p>
+            </div>
+          </div>
+          }
+
+          @if(viviendaEditandoId === vivienda.id) {
+          <div class="formulario">
+            <label>Título:</label>
+            <input type="text" [(ngModel)]="viviendaEditada.titulo">
+            <label>Descripción:</label>
+            <input type="text" [(ngModel)]="viviendaEditada.descripcion">
+            <label>Dirección:</label>
+            <input type="text" [(ngModel)]="viviendaEditada.direccion">
+            <label>Ciudad:</label>
+            <input type="text" [(ngModel)]="viviendaEditada.ciudad">
+            <label>País:</label>
+            <input type="text" [(ngModel)]="viviendaEditada.pais">
+            <label>Capacidad (máx. 20):</label>
+            <input type="number" [(ngModel)]="viviendaEditada.capacidad">
+            @if(viviendaEditada.tipo !== 'INTERCAMBIO') {
+            <label>Precio por noche:</label>
+            <input type="number" [(ngModel)]="viviendaEditada.precioNoche">
+            }
+            <label>Tipo:</label>
+            <select [(ngModel)]="viviendaEditada.tipo">
+              <option value="ALQUILER">Alquiler</option>
+              <option value="INTERCAMBIO">Intercambio</option>
+            </select>
+            @if(errorEditar) { <p class="mensajeError">{{ errorEditar }}</p> }
+            <button class="botonGuardar" (click)="guardarVivienda(vivienda)">Guardar</button>
+          </div>
+          }
+        </div>
+        }
+        } @else {
+        <p class="textoSinDatos">No tienes viviendas registradas.</p>
+        }
+      </div>
+    </div>
+
+    <div class="columna columnaReservas">
+
+      @if(viviendas.length > 0) {
+      <div class="seccion">
+        <div class="cabeceraSeccion">
+          <h3 class="tituloSeccion">📋 Reservas recibidas</h3>
+        </div>
+        @if(reservasViviendas.length > 0) {
+        @for(reserva of reservasViviendas; track reserva.id) {
+        <div class="tarjetaVivienda">
+          <div class="cabeceraTarjeta">
+            <div class="fechasReserva">
+              <span class="fecha">{{ reserva.fechaInicio }}</span>
+              <span class="fechaSeparador">→</span>
+              <span class="fecha">{{ reserva.fechaFin }}</span>
+            </div>
+            <span
+              [class]="reserva.estado === 'CONFIRMADA' ? 'estadoConfirmada' : reserva.estado === 'RECHAZADA' ? 'estadoRechazada' : 'estadoPendiente'">
+              {{ reserva.estado }}
+            </span>
+          </div>
+          <div class="contenidoTarjeta">
+            <div class="campoInfo">
+              <label class="etiquetaInfo">Vivienda</label>
+              <p class="valorInfo">{{ reserva.vivienda.titulo }}</p>
+            </div>
+            <div class="campoInfo">
+              <label class="etiquetaInfo">Solicitante</label>
+              <p class="valorInfo">{{ reserva.usuario.nombre }} {{ reserva.usuario.apellidos }}</p>
+            </div>
+            @if(reserva.tipo !== 'INTERCAMBIO') {
+            <div class="campoInfo">
+              <label class="etiquetaInfo">Precio total</label>
+              <p class="valorInfo">{{ reserva.precioTotal ? (reserva.precioTotal + ' €') : '—' }}</p>
+            </div>
+            }
+          </div>
+          @if(reserva.estado === 'PENDIENTE') {
+          <div class="accionesReserva">
+            @if(reserva.tipo === 'INTERCAMBIO') {
+            <button class="botonSecundario" (click)="verIntercambio(reserva.id)">Ver intercambio</button>
+            } @else {
+            <button class="botonSecundario" (click)="aceptarReserva(reserva)">✓ Aceptar</button>
+            }
+            <button class="botonEliminar" (click)="rechazarReserva(reserva)">✕ Rechazar</button>
+          </div>
+          }
+        </div>
+        }
+        } @else {
+        <p class="textoSinDatos">Sin reservas pendientes.</p>
+        }
+      </div>
+      }
+
+      <div class="seccion">
+        <div class="cabeceraSeccion">
+          <h3 class="tituloSeccion">🗓️ Mis reservas</h3>
+        </div>
+        @if(reservas.length > 0) {
+        @for(reserva of reservas; track reserva.id) {
+        <div class="tarjetaVivienda">
+          <div class="cabeceraTarjeta">
+            <div class="fechasReserva">
+              <span class="fecha">{{ reserva.fechaInicio }}</span>
+              <span class="fechaSeparador">→</span>
+              <span class="fecha">{{ reserva.fechaFin }}</span>
+            </div>
+            <span
+              [class]="reserva.estado === 'CONFIRMADA' ? 'estadoConfirmada' : reserva.estado === 'RECHAZADA' ? 'estadoRechazada' : 'estadoPendiente'">
+              {{ reserva.estado }}
+            </span>
+          </div>
+          <div class="contenidoTarjeta">
+            <div class="campoInfo">
+              <label class="etiquetaInfo">Vivienda</label>
+              <p class="valorInfo">{{ reserva.vivienda.titulo }}</p>
+            </div>
+            <div class="campoInfo">
+              <label class="etiquetaInfo">Ubicación</label>
+              <p class="valorInfo">{{ reserva.vivienda.ciudad }}, {{ reserva.vivienda.pais }}</p>
+            </div>
+            @if(reserva.tipo !== 'INTERCAMBIO') {
+            <div class="campoInfo">
+              <label class="etiquetaInfo">Precio total</label>
+              <p class="valorInfo">{{ reserva.precioTotal ? (reserva.precioTotal + ' €') : '—' }}</p>
+            </div>
+            }
+          </div>
+          @if(reserva.estado === 'PENDIENTE') {
+          <div class="accionesReserva">
+            <button class="botonEliminar" (click)="cancelarReserva(reserva.id)">Cancelar reserva</button>
+          </div>
+          }
+          @if(reserva.estado === 'CONFIRMADA' && !reserva.valorado) {
+          <div class="accionesReserva">
+            @if(valorandoReservaId !== reserva.id) {
+            <button class="botonSecundario" (click)="valorandoReservaId = reserva.id!; puntuacion = 0">⭐ Valorar</button>
+            } @else {
+            <select [(ngModel)]="puntuacion">
+              <option value="0" disabled>Elige puntuación</option>
+              <option value="1">1 - Malo</option>
+              <option value="2">2 - Regular</option>
+              <option value="3">3 - Bueno</option>
+              <option value="4">4 - Muy bueno</option>
+              <option value="5">5 - Excelente</option>
+            </select>
+            <button class="botonSecundario" (click)="valorar(reserva)">Enviar</button>
+            <button class="botonCancelar" (click)="valorandoReservaId = null">Cancelar</button>
+            }
+          </div>
+          }
+        </div>
+        }
+        } @else {
+        <p class="textoSinDatos">No tienes reservas activas.</p>
+        }
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

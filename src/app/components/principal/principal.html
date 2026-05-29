@@ -1,0 +1,254 @@
+<nav class="navbar">
+  <div class="contenedor">
+    <div class="logo">
+      <a href="/principal" style="display: flex; flex-direction: column; align-items: center; text-decoration: none;">
+        <!-- SVG del logo complejo -->
+        <svg width="60" height="60" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <!-- Degradados -->
+            <linearGradient id="roof1" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#8b7cf8" />
+              <stop offset="100%" style="stop-color:#6c5ce7" />
+            </linearGradient>
+            <linearGradient id="roof2" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#a29bfe" />
+              <stop offset="100%" style="stop-color:#8b7cf8" />
+            </linearGradient>
+            <linearGradient id="wall1" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:rgba(108, 92, 231, 0.25)" />
+              <stop offset="100%" style="stop-color:rgba(108, 92, 231, 0.1)" />
+            </linearGradient>
+            <linearGradient id="arrow" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#6c5ce7" />
+              <stop offset="100%" style="stop-color:#a29bfe" />
+            </linearGradient>
+            <linearGradient id="tree" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#2ecc71" />
+              <stop offset="100%" style="stop-color:#27ae60" />
+            </linearGradient>
+            <!-- Sombra -->
+            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(108, 92, 231, 0.3)" />
+            </filter>
+          </defs>
+
+          <!-- Nube 1 -->
+          <g transform="translate(8, 12)" opacity="0.4">
+            <circle cx="10" cy="10" r="8" fill="white" />
+            <circle cx="20" cy="6" r="10" fill="white" />
+            <circle cx="32" cy="8" r="7" fill="white" />
+            <rect x="10" y="10" width="22" height="8" rx="4" fill="white" />
+          </g>
+
+          <!-- Nube 2 -->
+          <g transform="translate(78, 8)" opacity="0.3">
+            <circle cx="10" cy="10" r="6" fill="white" />
+            <circle cx="18" cy="7" r="8" fill="white" />
+            <circle cx="28" cy="9" r="5" fill="white" />
+            <rect x="10" y="10" width="18" height="6" rx="3" fill="white" />
+          </g>
+
+          <!-- Sol -->
+          <g transform="translate(95, 15)" opacity="0.5">
+            <circle cx="0" cy="0" r="8" fill="#f1c40f" />
+            <line x1="0" y1="-12" x2="0" y2="-15" stroke="#f1c40f" stroke-width="2" stroke-linecap="round" />
+            <line x1="0" y1="12" x2="0" y2="15" stroke="#f1c40f" stroke-width="2" stroke-linecap="round" />
+            <line x1="-12" y1="0" x2="-15" y2="0" stroke="#f1c40f" stroke-width="2" stroke-linecap="round" />
+            <line x1="12" y1="0" x2="15" y2="0" stroke="#f1c40f" stroke-width="2" stroke-linecap="round" />
+            <line x1="-8" y1="-8" x2="-11" y2="-11" stroke="#f1c40f" stroke-width="2" stroke-linecap="round" />
+            <line x1="8" y1="8" x2="11" y2="11" stroke="#f1c40f" stroke-width="2" stroke-linecap="round" />
+            <line x1="-8" y1="8" x2="-11" y2="11" stroke="#f1c40f" stroke-width="2" stroke-linecap="round" />
+            <line x1="8" y1="-8" x2="11" y2="-11" stroke="#f1c40f" stroke-width="2" stroke-linecap="round" />
+          </g>
+
+          <!-- Casa 1 -->
+          <g transform="translate(8, 42)" filter="url(#shadow)">
+            <!-- Base -->
+            <rect x="8" y="18" width="34" height="28" rx="3" fill="url(#wall1)" stroke="#a29bfe" stroke-width="1.5" />
+            <!-- Tejado -->
+            <path d="M4 20 L25 2 L46 20" stroke="url(#roof1)" stroke-width="2.5" fill="url(#roof1)"
+              stroke-linejoin="round" />
+            <!-- Chimenea -->
+            <rect x="36" y="6" width="6" height="14" rx="1" stroke="#a29bfe" stroke-width="1.5"
+              fill="rgba(162, 155, 254, 0.3)" />
+            <!-- Humo -->
+            <circle cx="39" cy="4" r="2" fill="#a29bfe" opacity="0.4" />
+            <circle cx="41" cy="1" r="1.5" fill="#a29bfe" opacity="0.3" />
+            <!-- Puerta -->
+            <path d="M20 46 L20 35 C20 32, 22 30, 25 30 C28 30, 30 32, 30 35 L30 46" stroke="#a29bfe" stroke-width="1.5"
+              fill="rgba(108, 92, 231, 0.2)" />
+            <circle cx="28" cy="38" r="1" fill="#a29bfe" />
+            <!-- Ventana izquierda -->
+            <rect x="12" y="24" width="8" height="8" rx="1.5" stroke="#a29bfe" stroke-width="1.5"
+              fill="rgba(162, 155, 254, 0.15)" />
+            <line x1="16" y1="24" x2="16" y2="32" stroke="#a29bfe" stroke-width="1" />
+            <line x1="12" y1="28" x2="20" y2="28" stroke="#a29bfe" stroke-width="1" />
+            <!-- Ventana derecha -->
+            <rect x="32" y="24" width="8" height="8" rx="1.5" stroke="#a29bfe" stroke-width="1.5"
+              fill="rgba(162, 155, 254, 0.15)" />
+            <line x1="36" y1="24" x2="36" y2="32" stroke="#a29bfe" stroke-width="1" />
+            <line x1="32" y1="28" x2="40" y2="28" stroke="#a29bfe" stroke-width="1" />
+          </g>
+
+          <!-- Árbol -->
+          <g transform="translate(48, 50)">
+            <rect x="6" y="20" width="6" height="18" rx="2" fill="#8B4513" />
+            <circle cx="9" cy="16" r="10" fill="url(#tree)" />
+            <circle cx="4" cy="22" r="7" fill="#27ae60" />
+            <circle cx="14" cy="22" r="7" fill="#2ecc71" />
+            <circle cx="9" cy="12" r="7" fill="#27ae60" />
+          </g>
+
+          <!-- Flecha de intercambio -->
+          <g transform="translate(62, 58)">
+            <path d="M0 10 C10 25, 20 25, 28 10" stroke="url(#arrow)" stroke-width="3" fill="none"
+              stroke-linecap="round" />
+            <path d="M0 14 C10 -1, 20 -1, 28 14" stroke="url(#arrow)" stroke-width="3" fill="none"
+              stroke-linecap="round" />
+            <polygon points="28,10 23,6 23,14" fill="#6c5ce7" />
+            <polygon points="28,14 23,10 23,18" fill="#a29bfe" />
+            <circle cx="14" cy="12" r="2" fill="#6c5ce7" opacity="0.6" />
+          </g>
+
+          <!-- Casa 2 -->
+          <g transform="translate(72, 42)" filter="url(#shadow)">
+            <rect x="8" y="18" width="34" height="28" rx="3" fill="url(#wall1)" stroke="#a29bfe" stroke-width="1.5" />
+            <path d="M4 20 L25 2 L46 20" stroke="url(#roof2)" stroke-width="2.5" fill="url(#roof2)"
+              stroke-linejoin="round" />
+            <rect x="6" y="6" width="6" height="14" rx="1" stroke="#a29bfe" stroke-width="1.5"
+              fill="rgba(162, 155, 254, 0.3)" />
+            <path d="M20 46 L20 35 C20 32, 22 30, 25 30 C28 30, 30 32, 30 35 L30 46" stroke="#a29bfe" stroke-width="1.5"
+              fill="rgba(108, 92, 231, 0.2)" />
+            <circle cx="28" cy="38" r="1" fill="#a29bfe" />
+            <rect x="12" y="24" width="8" height="8" rx="1.5" stroke="#a29bfe" stroke-width="1.5"
+              fill="rgba(162, 155, 254, 0.15)" />
+            <line x1="16" y1="24" x2="16" y2="32" stroke="#a29bfe" stroke-width="1" />
+            <line x1="12" y1="28" x2="20" y2="28" stroke="#a29bfe" stroke-width="1" />
+            <rect x="32" y="24" width="8" height="8" rx="1.5" stroke="#a29bfe" stroke-width="1.5"
+              fill="rgba(162, 155, 254, 0.15)" />
+            <line x1="36" y1="24" x2="36" y2="32" stroke="#a29bfe" stroke-width="1" />
+            <line x1="32" y1="28" x2="40" y2="28" stroke="#a29bfe" stroke-width="1" />
+          </g>
+
+          <!-- Césped -->
+          <g transform="translate(0, 85)" opacity="0.3">
+            <ellipse cx="60" cy="5" rx="55" ry="6" fill="#27ae60" />
+          </g>
+
+          <!-- Flores -->
+          <circle cx="55" cy="88" r="1.5" fill="#ff6b7a" />
+          <circle cx="65" cy="90" r="1.5" fill="#f1c40f" />
+          <circle cx="45" cy="89" r="1" fill="#ff6b7a" />
+        </svg>
+
+        <!-- Texto debajo -->
+        <span class="logo-texto">Entre Casas</span>
+      </a>
+    </div>
+
+
+    <div class="enlaces">
+      <a href="/principal">Inicio</a>
+
+      @if(usuario) {
+      <button class="rutaPerfil" (click)="rutaPerfil()">
+        Mi Perfil
+        @if(reservasSinVer > 0) {
+        <span class="numero">{{ reservasSinVer }}</span>
+        }
+      </button>
+      <button class="rutaMensaje" (click)="rutaMensajes()">
+        Mensajes
+        @if(mensajesSinLeer > 0) {
+        <span class="numero">{{ mensajesSinLeer }}</span>
+        }
+      </button>
+      <button class="rutaRanking" (click)="rutaRanking()">Ranking</button>
+      }
+
+      @if(usuario?.rol === 'Admin') {
+      <button class="rutaAdministracion" (click)="rutaAdministracion()">Administración</button>
+      }
+    </div>
+
+    @if(usuario) {
+    <div class="nav">
+      <div class="info">
+        <div class="avatar">{{ inicial }}</div>
+        <span class="detalles">{{ usuario.nombre }} {{ usuario.apellidos }}</span>
+        <button class="Cerrar" (click)="cerrarSesion()">Cerrar Sesión</button>
+      </div>
+    </div>
+    }
+  </div>
+</nav>
+
+<div class="pestanas">
+  <button [class.activo]="vistaActual === 'tarjetas'" (click)="cambiarVista('tarjetas')">🏠 Tarjetas</button>
+  <button [class.activo]="vistaActual === 'mapa'" (click)="cambiarVista('mapa')">🗺️ Mapa</button>
+</div>
+
+@if(vistaActual === 'tarjetas') {
+<div class="filtros">
+  <input type="text" placeholder="Buscar por ciudad..." [(ngModel)]="filtroCiudad" (input)="filtrar()">
+  <input type="text" placeholder="Capacidad mínima" [(ngModel)]="filtroCapacidad" (keypress)="soloNumeros($event)"
+    (input)="filtrar()" inputmode="numeric">
+
+  <div class="filtroPrecio">
+    <div class="precioH">
+      <span class="precioLabel">Precio</span>
+      <span class="precioValor">{{ filtroPrecioMin }} € — {{ filtroPrecioMax > 999 ? 'Sin límite' : filtroPrecioMax + '
+        €' }}</span>
+    </div>
+    <div class="precioRango">
+      <input type="range" min="0" max="1000" step="10" [ngModel]="filtroPrecioMin"
+        (ngModelChange)="onPrecioMinChange(+$event)">
+      <input type="range" [min]="0" [max]="precio" step="10" [ngModel]="filtroPrecioMax"
+        (ngModelChange)="onPrecioMaxChange($event)">
+    </div>
+  </div>
+
+  <select [(ngModel)]="filtroTipo" (change)="filtrar()">
+    <option value="">Todos los tipos</option>
+    <option value="ALQUILER">Alquiler</option>
+    <option value="INTERCAMBIO">Intercambio</option>
+  </select>
+
+  <button class="limpiarfiltro" (click)="limpiarFiltros()">Limpiar</button>
+</div>
+}
+
+
+@if(vistaActual === 'tarjetas') {
+@if(viviendasFiltradas.length > 0) {
+<div class="TarjetaViviendas">
+  @for(vivienda of viviendasFiltradas; track vivienda.id) {
+  <div class="tarjeta" (click)="verDetalle(vivienda.id)">
+    <div class="tarjetaH">
+      <span class="tipo">{{ vivienda.tipo }}</span>
+    </div>
+    <div class="contenidoy">
+      <h3 class="tarjetaTitulo">{{ vivienda.titulo }}</h3>
+      <p class="tarjetaUbicacion">{{ vivienda.ciudad }}, {{ vivienda.pais }}</p>
+      <p class="tarjetadescripcion">{{ vivienda.descripcion }}</p>
+      <div class="tarjetaDatos">
+        <span>{{ vivienda.capacidad }} personas</span>
+        @if(vivienda.tipo !== 'INTERCAMBIO') {
+        <span>{{ vivienda.precioNoche ? (vivienda.precioNoche + ' €/noche') : 'Precio no especificado' }}</span>
+        }
+      </div>
+      @if(vivienda.puntuacionMedia) {
+      <p class="tarjetaPuntuacion">⭐ {{ vivienda.puntuacionMedia }} / 5</p>
+      }
+    </div>
+  </div>
+  }
+</div>
+} @else {
+<p class="sin-resultados">No hay viviendas disponibles.</p>
+}
+}
+
+@if(vistaActual === 'mapa') {
+<div id="mapa" style="width: 100%; height: 600px; border-radius: 12px;"></div>
+}

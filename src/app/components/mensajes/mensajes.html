@@ -1,0 +1,63 @@
+<div class="contenedor">
+    <div class="header">
+        <h2>Mis mensajes</h2>
+        <button (click)="volver()">← Volver</button>
+    </div>
+
+    <div class="pestanas">
+        <button [class.activa]="seccion === 'recibidos'" (click)="seccion = 'recibidos'">Recibidos</button>
+        <button [class.activa]="seccion === 'enviados'" (click)="seccion = 'enviados'">Enviados</button>
+    </div>
+
+    @if(seccion === 'recibidos') {
+        @if(mensajes.length > 0) {
+            @for(mensaje of mensajes; track mensaje.id) {
+            <div class="tarjeta">
+                <div class="cabecera">
+                    <p class="emisor">De: {{ mensaje.emisor.nombre }} {{ mensaje.emisor.apellidos }}</p>
+                    <div>
+                        <span class="fecha">{{ mensaje.enviadoEn | date:'dd/MM/yyyy HH:mm' }}</span>
+                        <button class="botonEliminarVivienda" (click)="eliminar(mensaje.id)">Eliminar</button>
+                    </div>
+                </div>
+                <p class="contenido">{{ mensaje.contenido }}</p>
+                <div class="responder">
+                    <input type="text" placeholder="Escribe una respuesta..." [(ngModel)]="respuestas[mensaje.id!]">
+                    <button (click)="responder(mensaje)">Enviar</button>
+                </div>
+            </div>
+            }
+        } @else {
+            <p class="sin-viviendas">No tienes mensajes recibidos.</p>
+        }
+    }
+
+    @if(seccion === 'enviados') {
+        @if(mensajesEnviados.length > 0) {
+            @for(mensaje of mensajesEnviados; track mensaje.id) {
+            <div class="tarjeta">
+                <div class="cabecera">
+                    <p class="emisor">Para: {{ mensaje.receptor.nombre }} {{ mensaje.receptor.apellidos }}</p>
+                    <div>
+                        <span class="fecha">{{ mensaje.enviadoEn | date:'dd/MM/yyyy HH:mm' }}</span>
+                        <button class="boton-Eliminarvivienda" (click)="eliminar(mensaje.id)">Eliminar</button>
+                        <button class="botonEditar" (click)="prepararEditar(mensaje)">Editar</button>
+                    </div>
+                </div>
+
+                @if(mensajeEditandoId === mensaje.id) {
+                <div class="editarMensaje">
+                    <input type="text" [(ngModel)]="contenidoEditado">
+                    <button  class="GuardarMensajeEditado" (click)="guardarEdicion(mensaje)">Guardar</button>
+                    <button class="CancelarMensajeEditado" (click)="mensajeEditandoId = null">Cancelar</button>
+                </div>
+                } @else {
+                <p class="contenido">{{ mensaje.contenido }}</p>
+                }
+            </div>
+            }
+        } @else {
+            <p class="sin-viviendas">No tienes mensajes enviados.</p>
+        }
+    }
+</div>

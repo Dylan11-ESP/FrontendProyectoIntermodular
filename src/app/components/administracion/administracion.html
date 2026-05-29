@@ -1,0 +1,232 @@
+<div class="admin">
+    <h1 class="adminTitulo">Panel de administración</h1>
+    <button class="botonPrincipal" (click)="navegarPrincipal()">Página principal</button>
+</div>
+
+<div class="pestanas">
+    @if(seccion === 'usuarios') {
+    <button class="usuarios activo" disabled>Usuarios</button>
+    <button class="viviendas" (click)="seccion = 'viviendas'">Viviendas</button>
+    <button class="estadisticas" (click)="seccion = 'estadisticas'">Estadísticas</button>
+    }
+    @if(seccion === 'viviendas') {
+    <button class="usuarios" (click)="seccion = 'usuarios'">Usuarios</button>
+    <button class="viviendas activo" disabled>Viviendas</button>
+    <button class="estadisticas" (click)="seccion = 'estadisticas'">Estadísticas</button>
+    }
+    @if(seccion === 'estadisticas') {
+    <button class="usuarios" (click)="seccion = 'usuarios'">Usuarios</button>
+    <button class="viviendas" (click)="seccion = 'viviendas'">Viviendas</button>
+    <button class="estadisticas activo" disabled>Estadísticas</button>
+    }
+</div>
+
+@if(seccion === 'usuarios') {
+<button class="botonNuevo" (click)="abrirFormularioNuevoUsuario()">
+    {{ formularioNuevoUsuario ? '✕ Cancelar' : '+ Nuevo usuario' }}
+</button>
+
+@if(formularioNuevoUsuario) {
+<div class="formularioEditar">
+    <div class="campoFormulario">
+        <label class="etiquetaNombre">Nombre:</label>
+        <input class="entradaNombre" type="text" placeholder="Nombre" [(ngModel)]="nuevoUsuario.nombre">
+    </div>
+
+    <div class="campoFormulario">
+        <label class="etiquetaApellidos">Apellidos:</label>
+        <input class="entradaApellidos" type="text" placeholder="Apellidos" [(ngModel)]="nuevoUsuario.apellidos">
+    </div>
+
+    <div class="campoFormulario">
+        <label class="etiquetaEmail">Email:</label>
+        <input class="entradaEmail" type="email" placeholder="Email" [(ngModel)]="nuevoUsuario.email">
+    </div>
+
+    <div class="campoFormulario">
+        <label class="etiquetaContrasena">Contraseña:</label>
+        <input class="entradaContrasena" type="password" placeholder="Mínimo 8 caracteres"
+            [(ngModel)]="nuevoUsuario.password">
+    </div>
+
+    <div class="campoFormulario">
+        <label class="etiquetaTelefono">Teléfono:</label>
+        <input class="entradaTelefono" type="text" placeholder="Teléfono (9 dígitos)"
+            [(ngModel)]="nuevoUsuario.telefono">
+    </div>
+
+    <div class="campoFormulario">
+        <label class="etiquetaRol">Rol:</label>
+        <select class="selectorRol" [(ngModel)]="nuevoUsuario.rol">
+            <option value="Usuario">Usuario</option>
+            <option value="Admin">Admin</option>
+        </select>
+    </div>
+
+    @if(errorNuevoUsuario) {
+    <p class="rojo">{{ errorNuevoUsuario }}</p>
+    }
+
+    <button class="crearUsuario" (click)="crearUsuario()">Crear</button>
+</div>
+}
+
+<table class="tablaUsuarios">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(u of usuarios; track u.id) {
+        @if(usuarioEditando && usuarioEditando.id === u.id) {
+        <tr class="filaEdicion">
+            <td><input type="text" [(ngModel)]="usuarioEditando.nombre" placeholder="Nombre"></td>
+            <td><input type="text" [(ngModel)]="usuarioEditando.apellidos" placeholder="Apellidos"></td>
+            <td><input type="email" [(ngModel)]="usuarioEditando.email" placeholder="Email"></td>
+            <td><input type="text" [(ngModel)]="usuarioEditando.telefono" placeholder="9 dígitos"></td>
+            <td>
+                <select [(ngModel)]="usuarioEditando.rol">
+                    <option value="Usuario">Usuario</option>
+                    <option value="Admin">Admin</option>
+                </select>
+            </td>
+            <td class="accionesEdicion">
+                @if(errorEditarUsuario) {
+                <span class="rojo errorEnLinea">{{ errorEditarUsuario }}</span>
+                }
+                <button class="botonGuardar" (click)="guardarEditarUsuario()">Guardar</button>
+                <button class="botonCancelar" (click)="cancelarEditarUsuario()">Cancelar</button>
+            </td>
+        </tr>
+        } @else {
+        <tr>
+            <td>{{u.nombre}}</td>
+            <td>{{u.apellidos}}</td>
+            <td>{{u.email}}</td>
+            <td>{{u.telefono}}</td>
+            <td>{{u.rol}}</td>
+            <td class="acciones">
+                <button class="botonEditar" (click)="abrirEditarUsuario(u)">Editar</button>
+                <button class="botonEliminar" (click)="eliminarUsuario(u.id)">Eliminar</button>
+            </td>
+        </tr>
+        }
+        }
+    </tbody>
+</table>
+}
+
+@if(seccion === 'viviendas') {
+<table class="tablaViviendas">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Ciudad</th>
+            <th>País</th>
+            <th>Tipo</th>
+            <th>Capacidad</th>
+            <th>Precio/noche</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(v of viviendas; track v.id) {
+        @if(viviendaEditando && viviendaEditando.id === v.id) {
+        <tr class="filaEdicion">
+            <td><input type="text" [(ngModel)]="viviendaEditando.titulo" placeholder="Título"></td>
+            <td><input type="text" [(ngModel)]="viviendaEditando.ciudad" placeholder="Ciudad"></td>
+            <td><input type="text" [(ngModel)]="viviendaEditando.pais" placeholder="País"></td>
+            <td>
+                <select [(ngModel)]="viviendaEditando.tipo" disabled>
+                    <option value="ALQUILER">Alquiler</option>
+                    <option value="INTERCAMBIO">Intercambio</option>
+                </select>
+            </td>
+            <td><input type="number" [(ngModel)]="viviendaEditando.capacidad" min="1" placeholder="Cap."></td>
+            <td>
+                @if(viviendaEditando.tipo === 'ALQUILER') {
+                <input type="number" [(ngModel)]="viviendaEditando.precioNoche" min="0" step="0.01"
+                    placeholder="€/noche">
+                } @else {
+                <span class="sinPrecio">—</span>
+                }
+            </td>
+            <td>
+                <select [(ngModel)]="viviendaEditando.activa">
+                    <option [ngValue]="true">Activa</option>
+                    <option [ngValue]="false">Inactiva</option>
+                </select>
+            </td>
+            <td class="accionesEdicion">
+                @if(errorEditarVivienda) {
+                <span class="rojo errorEnLinea">{{ errorEditarVivienda }}</span>
+                }
+                <button class="botonGuardar" (click)="guardarEditarVivienda()">Guardar</button>
+                <button class="botonCancelar" (click)="cancelarEditarVivienda()">Cancelar</button>
+            </td>
+        </tr>
+        <tr class="filaEdicion filaExtra">
+            <td colspan="4">
+                <label>Dirección:</label>
+                <input type="text" [(ngModel)]="viviendaEditando.direccion" placeholder="Dirección completa">
+            </td>
+            <td colspan="4">
+                <label>Descripción:</label>
+                <input type="text" [(ngModel)]="viviendaEditando.descripcion" placeholder="Descripción breve">
+            </td>
+        </tr>
+        } @else {
+        <tr>
+            <td>{{v.titulo}}</td>
+            <td>{{v.ciudad}}</td>
+            <td>{{v.pais}}</td>
+            <td>{{v.tipo}}</td>
+            <td>{{v.capacidad}}</td>
+            <td>{{v.precioNoche ? (v.precioNoche + ' €') : '-'}}</td>
+            <td>{{v.activa ? 'Activa' : 'Inactiva'}}</td>
+            <td class="acciones">
+                <button class="botonEditar" (click)="abrirEditarVivienda(v)">Editar</button>
+                <button class="botonEliminar" (click)="eliminarVivienda(v.id)">Eliminar</button>
+            </td>
+        </tr>
+        }
+        }
+    </tbody>
+</table>
+}
+
+@if(seccion === 'estadisticas') {
+<div class="estadisticas">
+    <div class="tarjetaEstadistica">
+        <p class="numeroEstadistica">{{ totalUsuarios() }}</p>
+        <p class="etiquetaEstadistica">Usuarios totales</p>
+    </div>
+    <div class="tarjetaEstadistica">
+        <p class="numeroEstadistica">{{ totalAdmins() }}</p>
+        <p class="etiquetaEstadistica">Administradores</p>
+    </div>
+    <div class="tarjetaEstadistica">
+        <p class="numeroEstadistica">{{ totalViviendas() }}</p>
+        <p class="etiquetaEstadistica">Viviendas totales</p>
+    </div>
+    <div class="tarjetaEstadistica">
+        <p class="numeroEstadistica">{{ viviendasActivas() }}</p>
+        <p class="etiquetaEstadistica">Viviendas activas</p>
+    </div>
+    <div class="tarjetaEstadistica">
+        <p class="numeroEstadistica">{{ viviendasAlquiler() }}</p>
+        <p class="etiquetaEstadistica">Viviendas en alquiler</p>
+    </div>
+    <div class="tarjetaEstadistica">
+        <p class="numeroEstadistica">{{ viviendasIntercambio() }}</p>
+        <p class="etiquetaEstadistica">Viviendas en intercambio</p>
+    </div>
+</div>
+}

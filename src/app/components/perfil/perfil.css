@@ -1,0 +1,535 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:host,
+body {
+    min-height: 100vh;
+    background: #0f0f0f;
+    font-family: 'DM Sans', sans-serif;
+    color: whitesmoke;
+}
+
+:host::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background:
+        radial-gradient(ellipse 140% 35% at 15% 85%, rgba(80, 60, 200, 0.35) 0%, transparent 75%),
+        radial-gradient(ellipse 50% 110% at 85% 15%, rgba(150, 50, 220, 0.3) 0%, transparent 65%),
+        radial-gradient(ellipse 90% 70% at 50% 50%, rgba(40, 180, 210, 0.2) 0%, transparent 80%),
+        radial-gradient(ellipse 60% 80% at 30% 20%, rgba(220, 70, 150, 0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 200% 60% at 70% 60%, rgba(100, 30, 180, 0.15) 0%, transparent 85%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.botonVolver {
+    padding: 10px 18px;
+    margin: 20px 0 0 24px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.botonVolver:hover {
+    background: rgba(108, 92, 231, 0.15);
+    color: whitesmoke;
+    border-color: #6c5ce7;
+    transform: translateX(-3px);
+}
+
+.pagina {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 24px 60px;
+}
+
+.fila {
+    display: flex;
+    gap: 28px;
+    margin-bottom: 32px;
+}
+
+.filaDos {
+    align-items: stretch;
+}
+
+.columna {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.columnaPerfil {
+    flex: 0.8;
+}
+
+.tarjetaUsuario {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 32px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.tarjetaUsuario:hover {
+    border-color: rgba(108, 92, 231, 0.4);
+    background: rgba(108, 92, 231, 0.06);
+    transform: translateY(-3px);
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: 700;
+    color: whitesmoke;
+    margin: 0 auto 20px;
+    box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+}
+
+.infoUsuario {
+    margin-bottom: 24px;
+}
+
+.nombreUsuario {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: whitesmoke;
+}
+
+.contacto {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 4px;
+}
+
+.fechaRegistro {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.35);
+    margin-top: 8px;
+}
+
+.botonEditar {
+    padding: 10px 24px;
+    background: rgba(108, 92, 231, 0.15);
+    border: 1px solid rgba(108, 92, 231, 0.3);
+    border-radius: 30px;
+    color: #a29bfe;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.botonEditar:hover {
+    background: rgba(108, 92, 231, 0.25);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.seccion {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+.seccion:hover {
+    border-color: rgba(108, 92, 231, 0.3);
+}
+
+.alturaCompleta {
+    height: 100%;
+}
+
+.cabeceraSeccion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 12px;
+}
+
+.tituloSeccion {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: whitesmoke;
+}
+
+.botonSecundario {
+    padding: 8px 18px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.botonSecundario:hover {
+    background: rgba(108, 92, 231, 0.15);
+    color: whitesmoke;
+    border-color: #6c5ce7;
+}
+
+.botonEliminar {
+    padding: 8px 18px;
+    background: rgba(255, 107, 122, 0.1);
+    border: 1px solid rgba(255, 107, 122, 0.2);
+    border-radius: 30px;
+    color: #ff6b7a;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.botonEliminar:hover {
+    background: rgba(255, 107, 122, 0.2);
+    transform: translateY(-2px);
+}
+
+.botonGuardar {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #6c5ce7, #8b7cf8);
+    border: none;
+    border-radius: 12px;
+    color: whitesmoke;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.botonGuardar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+}
+
+.botonCancelar {
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.botonCancelar:hover {
+    background: rgba(255, 107, 122, 0.15);
+    border-color: #ff6b7a;
+    color: #ff6b7a;
+}
+
+.formulario {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    padding: 24px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.formulario label {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.formulario input,
+.formulario select {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: whitesmoke;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.formulario input:focus,
+.formulario select:focus {
+    border-color: #6c5ce7;
+    background: rgba(108, 92, 231, 0.08);
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.15);
+}
+
+.formulario select option {
+    background: #1a1a2a;
+    color: whites;
+}
+
+.textoPlaceholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.mensajeError {
+    color: #ff6b7a;
+    font-size: 13px;
+    padding: 8px 12px;
+    background: rgba(255, 107, 122, 0.1);
+    border: 1px solid rgba(255, 107, 122, 0.2);
+    border-radius: 10px;
+}
+
+.mensajeExito {
+    color: #2ecc71;
+    font-size: 13px;
+    padding: 8px 12px;
+    background: rgba(46, 204, 113, 0.1);
+    border: 1px solid rgba(46, 204, 113, 0.2);
+    border-radius: 10px;
+}
+
+.mapaViviendas {
+    width: 100%;
+    height: 280px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tarjetaVivienda {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.tarjetaVivienda:hover {
+    border-color: rgba(108, 92, 231, 0.4);
+    background: rgba(108, 92, 231, 0.06);
+}
+
+.cabeceraTarjeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: rgba(0, 0, 0, 0.2);
+    gap: 12px;
+}
+
+.tituloTarjeta {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: whitesmoke;
+}
+
+.accionesTarjeta {
+    display: flex;
+    gap: 10px;
+}
+
+.contenidoTarjeta {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.campoInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.etiquetaInfo {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.valorInfo {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.textoSinDatos {
+    text-align: center;
+    padding: 40px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 14px;
+}
+
+.fechasReserva {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.fecha {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.fechaSeparador {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.estadoConfirmada {
+    background: rgba(46, 204, 113, 0.15);
+    border: 1px solid rgba(46, 204, 113, 0.3);
+    color: #2ecc71;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.estadoRechazada {
+    background: rgba(255, 107, 122, 0.15);
+    border: 1px solid rgba(255, 107, 122, 0.3);
+    color: #ff6b7a;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.estadoPendiente {
+    background: rgba(241, 196, 15, 0.15);
+    border: 1px solid rgba(241, 196, 15, 0.3);
+    color: #f1c40f;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.accionesReserva {
+    display: flex;
+    gap: 12px;
+    padding: 16px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+@media (max-width: 1024px) {
+    .fila {
+        flex-direction: column;
+        gap: 24px;
+    }
+    
+    .columnaPerfil {
+        flex: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .botonVolver {
+        margin: 12px 0 0 16px;
+    }
+    
+    .pagina {
+        padding: 16px 16px 40px;
+    }
+    
+    .tarjetaUsuario {
+        padding: 24px;
+    }
+    
+    .avatar {
+        width: 80px;
+        height: 80px;
+        font-size: 32px;
+    }
+    
+    .nombreUsuario {
+        font-size: 22px;
+    }
+    
+    .seccion {
+        padding: 20px;
+    }
+    
+    .tituloSeccion {
+        font-size: 20px;
+    }
+    
+    .cabeceraTarjeta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .accionesTarjeta {
+        width: 100%;
+    }
+    
+    .botonSecundario,
+    .botonEliminar {
+        flex: 1;
+        text-align: center;
+    }
+    
+    .contenidoTarjeta {
+        grid-template-columns: 1fr;
+    }
+    
+    .accionesReserva {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .formulario {
+        padding: 16px;
+    }
+    
+    .botonGuardar,
+    .botonCancelar {
+        width: 100%;
+    }
+}

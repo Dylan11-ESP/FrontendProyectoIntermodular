@@ -1,0 +1,56 @@
+<div class="contenedor">
+    <h1 class="titulo">Bien<span>venido</span></h1>
+    <div class="registrate">
+        <div class="carpetas">
+            <button class="btnCarpeta" [class.activo]="modo === 'iniciar'" (click)="activar('iniciar')">Iniciar
+                sesión</button>
+            <button class="btnCarpeta" [class.activo]="modo === 'registrar'"
+                (click)="activar('registrar')">Registrarse</button>
+        </div>
+
+        @if (modo === 'iniciar') {
+        <div class="formularioLogin">
+            <label>Email</label>
+            <input type="email" placeholder="tu@email.com" id="emailSesion" (input)="limpiarErrorLogin()">
+            <label>Contraseña</label>
+            <input type="password" placeholder="●●●●●●●●" id="password" (input)="limpiarErrorLogin()">
+            @if(errorLogin) {
+            <p class="rojo">{{ errorLogin }}</p>
+            }
+            <button class="btnSesion" (click)="inicioSesion()" [disabled]="cargandoLogin">
+                {{ cargandoLogin ? 'Entrando...' : 'Iniciar sesión' }}
+            </button>
+        </div>
+        }
+
+        @if (modo === 'registrar') {
+        <div class="formularioRegistro">
+            <label>Nombre</label>
+            <input type="text" placeholder="Tu nombre" id="nombreRegistro" (input)="limpiarErrorRegistro()">
+
+            <label>Apellidos</label>
+            <input type="text" placeholder="Tus apellidos" id="apellidoRegistro" (input)="limpiarErrorRegistro()">
+
+            <label>Email</label>
+            <input type="email" placeholder="tu@email.com" id="emailRegistro" (input)="limpiarErrorRegistro()">
+
+            <label>Contraseña</label>
+            <input type="password" placeholder="●●●●●●●●" id="passwordRegistro" (input)="limpiarErrorRegistro()">
+
+            <label>Repite la contraseña</label>
+            <input type="password" placeholder="●●●●●●●●" id="passwordRegistro2" (input)="limpiarErrorRegistro()">
+
+            <label>Teléfono</label>
+            <input type="text" placeholder="600 000 000" id="tlfRegistro" (input)="limpiarErrorRegistro()">
+
+            @if(errorRegistro) {
+            <p class="rojo">{{ errorRegistro }}</p>
+            }
+
+            <button class="btnRegistro" (click)="registro()" [disabled]="cargandoRegistro">
+                {{ cargandoRegistro ? 'Creando cuenta...' : 'Crear cuenta' }}
+            </button>
+        </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,101 @@
+@if(vivienda) {
+<div class="contenedorr">
+    <button class="volver" (click)="volver()">← Volver</button>
+
+    <h2>{{ vivienda.titulo }}</h2>
+    <p class="ubicacion">{{ vivienda.direccion }}, {{ vivienda.ciudad }}, {{ vivienda.pais }}</p>
+
+    <div class="info">
+        <div class="campo">
+            <label>Tipo:</label>
+            <p>{{ vivienda.tipo }}</p>
+        </div>
+        <div class="campo">
+            <label>Capacidad:</label>
+            <p>{{ vivienda.capacidad }} personas</p>
+        </div>
+        @if(vivienda.tipo !== 'INTERCAMBIO') {
+        <div class="campo">
+            <label>Precio por noche:</label>
+            <p>{{ vivienda.precioNoche ? (vivienda.precioNoche + ' €') : 'No especificado' }}</p>
+        </div>
+        }
+        <div class="campo">
+            <label>Puntuación:</label>
+            <p>{{ vivienda.puntuacionMedia ? (vivienda.puntuacionMedia + ' / 5') : 'Sin valoraciones' }}</p>
+        </div>
+        <div class="campo">
+            <label>Descripción:</label>
+            <p>{{ vivienda.descripcion }}</p>
+        </div>
+        <div class="campo">
+            <label>Propietario:</label>
+            <p>{{ vivienda.usuario.nombre }} {{ vivienda.usuario.apellidos }}</p>
+        </div>
+        <div class="campo">
+            <label>Teléfono:</label>
+            <p>{{ vivienda.usuario.telefono || 'No especificado' }}</p>
+        </div>
+    </div>
+
+    @if(reservaExitosa) {
+    <p class="exito">¡Reserva realizada con éxito! Está pendiente de confirmación.</p>
+    }
+
+    @if(mensajeExitoso) {
+    <p class="exito">¡Mensaje enviado al propietario!</p>
+    }
+
+    @if(!reservaExitosa) {
+    <button class="btnReservar" (click)="abrirFormularioReserva()">
+        {{ formularioReserva ? 'Cancelar' : 'Reservar' }}
+    </button>
+    }
+
+    @if(formularioReserva) {
+    <div class="formularioEditar">
+        <label>Fecha de inicio:</label>
+        <input type="date" id="fechaInicio" [(ngModel)]="fechaInicio" (change)="calcularPrecio()">
+
+        <label>Fecha de fin:</label>
+        <input type="date" id="fechaFin" [(ngModel)]="fechaFin" (change)="calcularPrecio()">
+
+        @if(precioTotal && vivienda.tipo !== 'INTERCAMBIO') {
+        <p class="precioCalculado">Precio total: {{ precioTotal }} €</p>
+        }
+
+        @if(errorReserva) {
+        <p class="rojo">{{ errorReserva }}</p>
+        }
+
+        <button class="Editar" (click)="reservar()" [disabled]="cargandoReserva">
+            {{ cargandoReserva ? 'Reservando...' : 'Confirmar reserva' }}
+        </button>
+    </div>
+    }
+
+    @if(!mensajeExitoso) {
+    <button class="btnMensaje" (click)="formularioMensaje = !formularioMensaje">
+        {{ formularioMensaje ? 'Cancelar' : 'Contactar propietario' }}
+    </button>
+    }
+
+    @if(formularioMensaje) {
+    <div class="formularioEditar">
+        <label>Mensaje:</label>
+        <textarea placeholder="Escribe tu mensaje al propietario..." [(ngModel)]="contenidoMensaje"></textarea>
+
+        @if(errorMensaje) {
+        <p class="rojo">{{ errorMensaje }}</p>
+        }
+
+        <button class="Editar" (click)="enviarMensaje()" [disabled]="cargandoMensaje">
+            {{ cargandoMensaje ? 'Enviando...' : 'Enviar mensaje' }}
+        </button>
+    </div>
+    }
+
+</div>
+} @else {
+<p>Cargando vivienda...</p>
+}       

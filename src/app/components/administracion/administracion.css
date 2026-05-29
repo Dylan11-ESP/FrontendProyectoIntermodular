@@ -1,0 +1,466 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:host,
+body {
+    min-height: 100vh;
+    background: #0f0f0f;
+    font-family: 'DM Sans', sans-serif;
+    color: whitesmoke;
+}
+
+:host::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background:
+        radial-gradient(ellipse 140% 35% at 15% 85%, rgba(80, 60, 200, 0.35) 0%, transparent 75%),
+        radial-gradient(ellipse 50% 110% at 85% 15%, rgba(150, 50, 220, 0.3) 0%, transparent 65%),
+        radial-gradient(ellipse 90% 70% at 50% 50%, rgba(40, 180, 210, 0.2) 0%, transparent 80%),
+        radial-gradient(ellipse 60% 80% at 30% 20%, rgba(220, 70, 150, 0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 200% 60% at 70% 60%, rgba(100, 30, 180, 0.15) 0%, transparent 85%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.admin {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px 24px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.adminTitulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff, #a29bfe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.botonPrincipal {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.botonPrincipal:hover {
+    background: rgba(108, 92, 231, 0.15);
+    color: whitesmoke;
+    border-color: #6c5ce7;
+    transform: translateY(-2px);
+}
+
+.pestanas {
+    max-width: 1400px;
+    margin: 0 auto 30px;
+    padding: 0 24px;
+    display: flex;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pestanas button {
+    padding: 12px 28px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pestanas button:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.pestanas button.activo {
+    color: #a29bfe;
+    border-bottom: 2px solid #6c5ce7;
+}
+
+.botonNuevo {
+    max-width: 1400px;
+    margin: 0 auto 20px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #6c5ce7, #8b7cf8);
+    border: none;
+    border-radius: 12px;
+    color: whitesmoke;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    width: calc(100% - 48px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.botonNuevo:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+}
+
+.formularioEditar {
+    max-width: 1400px;
+    margin: 0 auto 30px;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.campoFormulario {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campoFormulario label {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.campoFormulario input,
+.campoFormulario select {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: whitesmoke;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.campoFormulario input:focus,
+.campoFormulario select:focus {
+    border-color: #6c5ce7;
+    background: rgba(108, 92, 231, 0.08);
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.15);
+}
+
+.crearUsuario {
+    margin-top: 10px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #6c5ce7, #8b7cf8);
+    border: none;
+    border-radius: 12px;
+    color: whitesmoke;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.crearUsuario:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+}
+
+.tablaUsuarios,
+.tablaViviendas {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: calc(100% - 48px);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    overflow: hidden;
+    border-collapse: collapse;
+}
+
+.tablaUsuarios th,
+.tablaViviendas th {
+    text-align: left;
+    padding: 14px 16px;
+    background: rgba(0, 0, 0, 0.3);
+    color: #a29bfe;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tablaUsuarios td,
+.tablaViviendas td {
+    padding: 12px 16px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.tablaUsuarios tr:hover,
+.tablaViviendas tr:hover {
+    background: rgba(108, 92, 231, 0.05);
+}
+
+.filaEdicion {
+    background: rgba(108, 92, 231, 0.1);
+}
+
+.filaEdicion input,
+.filaEdicion select {
+    width: 100%;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(108, 92, 231, 0.3);
+    border-radius: 8px;
+    color: whitesmoke;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+}
+
+.filaEdicion input:focus,
+.filaEdicion select:focus {
+    border-color: #6c5ce7;
+    box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.2);
+}
+
+.filaExtra {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.filaExtra td {
+    padding: 12px 16px;
+}
+
+.filaExtra label {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.filaExtra input {
+    width: 100%;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: whitesmoke;
+    font-size: 13px;
+}
+
+.acciones {
+    display: flex;
+    gap: 8px;
+}
+
+.accionesEdicion {
+    display: flex;
+    gap: 8px;
+}
+
+.botonEditar,
+.botonGuardar,
+.botonCancelar,
+.botonEliminar {
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.botonEditar:hover {
+    background: rgba(108, 92, 231, 0.2);
+    border-color: #6c5ce7;
+    color: #a29bfe;
+}
+
+.botonGuardar {
+    background: rgba(46, 204, 113, 0.15);
+    border-color: rgba(46, 204, 113, 0.3);
+    color: #2ecc71;
+}
+
+.botonGuardar:hover {
+    background: rgba(46, 204, 113, 0.25);
+    transform: translateY(-1px);
+}
+
+.botonCancelar:hover {
+    background: rgba(255, 107, 122, 0.15);
+    border-color: #ff6b7a;
+    color: #ff6b7a;
+}
+
+.botonEliminar {
+    background: rgba(255, 107, 122, 0.1);
+    border-color: rgba(255, 107, 122, 0.2);
+    color: #ff6b7a;
+}
+
+.botonEliminar:hover {
+    background: rgba(255, 107, 122, 0.2);
+    transform: translateY(-1px);
+}
+
+.sinPrecio {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 13px;
+}
+
+.estadisticas {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.tarjetaEstadistica {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 28px 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.tarjetaEstadistica:hover {
+    transform: translateY(-4px);
+    border-color: rgba(108, 92, 231, 0.3);
+    background: rgba(108, 92, 231, 0.06);
+}
+
+.numeroEstadistica {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff, #a29bfe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 12px;
+}
+
+.etiquetaEstadistica {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.rojo {
+    color: #ff6b7a;
+    font-size: 13px;
+    padding: 8px 12px;
+    background: rgba(255, 107, 122, 0.1);
+    border: 1px solid rgba(255, 107, 122, 0.2);
+    border-radius: 8px;
+}
+
+.errorEnLinea {
+    display: inline-block;
+    margin-right: 12px;
+    padding: 4px 8px;
+    font-size: 11px;
+}
+
+select option {
+    background: #1a1a2a;
+    color: white;
+}
+
+@media (max-width: 1024px) {
+    .formularioEditar {
+        grid-template-columns: 1fr;
+    }
+    .crearUsuario {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 16px;
+    }
+    .adminTitulo {
+        font-size: 28px;
+    }
+    .pestanas {
+        padding: 0 16px;
+        overflow-x: auto;
+    }
+    .pestanas button {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+    .tablaUsuarios,
+    .tablaViviendas {
+        width: calc(100% - 32px);
+        display: block;
+        overflow-x: auto;
+    }
+    .tablaUsuarios th,
+    .tablaUsuarios td,
+    .tablaViviendas th,
+    .tablaViviendas td {
+        padding: 10px 12px;
+        font-size: 12px;
+    }
+    .estadisticas {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 0 16px;
+    }
+    .numeroEstadistica {
+        font-size: 32px;
+    }
+    .acciones {
+        flex-direction: column;
+        gap: 6px;
+    }
+    .botonEditar,
+    .botonGuardar,
+    .botonCancelar,
+    .botonEliminar {
+        width: 100%;
+        text-align: center;
+    }
+}

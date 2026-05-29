@@ -1,0 +1,52 @@
+<div class="contenedor">
+    <button class="volver" (click)="volver()">← Volver</button>
+
+    @if(reserva) {
+    <h2>Solicitud de intercambio</h2>
+    <p class="subtitulo">De: {{ reserva.usuario.nombre }} {{ reserva.usuario.apellidos }}</p>
+    <p class="subtitulo">Fechas: {{ reserva.fechaInicio }} → {{ reserva.fechaFin }}</p>
+
+    @if(intercambioCreado) {
+    <p class="exito">¡Intercambio creado con exito!</p>
+    } @else {
+
+    <h3 class="tituloSeccion">Viviendas de intercambio del solicitante</h3>
+
+    @if(viviendasSolicitante.length > 0) {
+    @for(vivienda of viviendasSolicitante; track vivienda.id) {
+    <div class="tarjeta" [class.seleccionada]="viviendaElegida?.id === vivienda.id" (click)="elegirVivienda(vivienda)">
+        <div class="cabecera">
+            <h3 class="tituloVivienda">{{ vivienda.titulo }}</h3>
+            @if(viviendaElegida?.id === vivienda.id) {
+            <span class="elegida"> Elegida</span>
+            }
+        </div>
+        <div class="contenido">
+            <div class="campo">
+                <label class="label">Dirección:</label>
+                <p class="valor-vivienda">{{ vivienda.direccion }}, {{ vivienda.ciudad }}</p>
+            </div>
+            <div class="campo">
+                <label class="label">Capacidad:</label>
+                <p class="valor">{{ vivienda.capacidad }} personas</p>
+            </div>
+        </div>
+    </div>
+    }
+
+    @if(error) {
+    <p class="rojo">{{ error }}</p>
+    }
+
+    <button class="confirmar" (click)="confirmarIntercambio()">Confirmar intercambio</button>
+
+    } @else {
+            <p class="sin-viviendas">El solicitante no tiene viviendas de intercambio disponibles.</p>
+
+    }
+
+    }
+    } @else {
+    <p>Cargando...</p>
+    }
+</div>
