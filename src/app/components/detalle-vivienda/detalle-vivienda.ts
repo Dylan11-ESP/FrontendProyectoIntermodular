@@ -38,6 +38,8 @@ export class DetalleVivienda {
 
   cargandoReserva: boolean = false;
   cargandoMensaje: boolean = false;
+  mesActual: Date = new Date();
+  diasCalendario: { fecha: Date; ocupado: boolean; fuera: boolean }[] = [];
 
   constructor(private activatedRoute: ActivatedRoute, private route: Router, private viviendaServicio: ViviendaService, private reservaServicio: ReservaService, private mensajeServicio: MensajeService, private cdr: ChangeDetectorRef, private servicioCompartido: ServicioCompartido) { }
 
@@ -63,9 +65,51 @@ export class DetalleVivienda {
     this.reservaServicio.getReservasVivienda(id).subscribe({
       next: (datos) => {
         this.reservasVivienda = datos;
+        this.generarCalendario();
       },
       error: (err) => console.error('Error al cargar reservas', err)
     });
+  }
+
+  generarCalendario() {
+    const año = this.mesActual.getFullYear();
+    const mes = this.mesActual.getMonth();
+    const primerDia = new Date(año, mes, 1);
+    const ultimoDia = new Date(año, mes + 1, 0);
+    const dias = [];
+
+    // Huecos vacíos antes del primer día
+    for (let i = 0; i < (primerDia.getDay() === 0 ? 6 : primerDia.getDay() - 1); i++) {
+      dias.push({ fecha: new Date(), ocupado: false, fuera: true });
+    }
+
+    // Días del mes
+    for (let d = 1; d <= ultimoDia.getDate(); d++) {
+      const fecha = new Date(año, mes, d);
+      const ocupado = this.reservasVivienda.some(r => {
+        if (r.estado !== 'CONFIRMADA') return false;
+        const ini = new Date(r.fechaInicio);
+        const fin = new Date(r.fechaFin);
+        return fecha >= ini && fecha <= fin;
+      });
+      dias.push({ fecha, ocupado, fuera: false });
+    }
+
+    this.diasCalendario = dias;
+  }
+
+  mesAnterior() {
+    this.mesActual = new Date(this.mesActual.getFullYear(), this.mesActual.getMonth() - 1, 1);
+    this.generarCalendario();
+  }
+
+  mesSiguiente() {
+    this.mesActual = new Date(this.mesActual.getFullYear(), this.mesActual.getMonth() + 1, 1);
+    this.generarCalendario();
+  }
+
+  getNombreMes(): string {
+    return this.mesActual.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
   }
 
   calcularPrecio() {

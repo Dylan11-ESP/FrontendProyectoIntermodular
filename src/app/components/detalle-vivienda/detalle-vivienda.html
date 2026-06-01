@@ -38,6 +38,29 @@
         </div>
     </div>
 
+    <div class="calendario">
+        <div class="cal-header">
+            <button (click)="mesAnterior()">&#8592;</button>
+            <span>{{ getNombreMes() }}</span>
+            <button (click)="mesSiguiente()">&#8594;</button>
+        </div>
+        <div class="cal-dias-semana">
+            <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span>
+            <span>Jue</span><span>Vie</span><span>Sáb</span>
+        </div>
+        <div class="cal-grid">
+            @for(dia of diasCalendario; track $index) {
+            <div class="cal-dia" [class.ocupado]="dia.ocupado" [class.fuera]="dia.fuera">
+                {{ dia.fuera ? '' : dia.fecha.getDate() }}
+            </div>
+            }
+        </div>
+        <div class="cal-leyenda">
+            <span class="leyenda-libre">■ Disponible</span>
+            <span class="leyenda-ocupado">■ Ocupado</span>
+        </div>
+    </div>
+
     @if(reservaExitosa) {
     <p class="exito">¡Reserva realizada con éxito! Está pendiente de confirmación.</p>
     }
@@ -98,4 +121,4 @@
 </div>
 } @else {
 <p>Cargando vivienda...</p>
-}       
+}
