@@ -285,15 +285,6 @@ h2 {
     .calendario .dias span {
         font-size: 10px;
     }
-
-    .calendario .leyenda {
-        gap: 16px;
-    }
-
-    .calendario .leyenda-libre,
-    .calendario .leyenda-ocupado {
-        font-size: 10px;
-    }
 }
 
 .calendario {
@@ -389,33 +380,4 @@ h2 {
     background: transparent;
     color: transparent;
     cursor: default;
-}
-
-.calendario .leyenda {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.calendario .leyenda-libre {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.calendario .leyenda-ocupado {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.calendario .leyenda-libre::before {
-    color: #a29bfe;
-    margin-right: 6px;
-}
-
-.calendario .leyenda-ocupado::before {
-    color: #ff6b7a;
-    margin-right: 6px;
 }
