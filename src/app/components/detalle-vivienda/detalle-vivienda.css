@@ -262,73 +262,86 @@ h2 {
 
 .calendario {
     margin: 20px 0;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
     max-width: 320px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
 }
 
-.cal-header {
+.cabecera {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 14px;
     font-weight: bold;
     text-transform: capitalize;
+    color: white;
 }
 
-.cal-header button {
-    background: none;
+.cabecera button {
+    background: rgba(255, 255, 255, 0.1);
     border: none;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 16px;
+    color: white;
+    border-radius: 6px;
+    padding: 4px 10px;
+    transition: background 0.2s;
 }
 
-.cal-dias-semana {
+.cabecera button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.dias {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     text-align: center;
-    font-size: 12px;
-    color: #888;
-    margin-bottom: 4px;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 6px;
 }
 
-.cal-grid {
+.grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
+    gap: 3px;
 }
 
-.cal-dia {
+.calDia {
     text-align: center;
-    padding: 6px 2px;
-    border-radius: 4px;
+    padding: 7px 2px;
+    border-radius: 6px;
     font-size: 13px;
-    background: #e8f5e9;
-    color: #2e7d32;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.85);
+    transition: background 0.2s;
 }
 
-.cal-dia.ocupado {
-    background: #ffebee;
-    color: #c62828;
+.calDia.ocupado {
+    background: rgba(198, 40, 40, 0.3);
+    color: #ff6b6b;
 }
 
-.cal-dia.fuera {
+.calDia.fuera {
     background: transparent;
     color: transparent;
 }
 
-.cal-leyenda {
-    margin-top: 10px;
+.leyenda {
+    margin-top: 12px;
     font-size: 12px;
     display: flex;
     gap: 16px;
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .leyenda-libre {
-    color: #2e7d32;
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .leyenda-ocupado {
-    color: #c62828;
+    color: #ff6b6b;
 }

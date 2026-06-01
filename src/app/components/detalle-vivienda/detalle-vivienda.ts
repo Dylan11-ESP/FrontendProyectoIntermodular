@@ -78,14 +78,12 @@ export class DetalleVivienda {
     const ultimoDia = new Date(año, mes + 1, 0);
     const dias = [];
 
-    // Huecos vacíos antes del primer día
     for (let i = 0; i < (primerDia.getDay() === 0 ? 6 : primerDia.getDay() - 1); i++) {
       dias.push({ fecha: new Date(), ocupado: false, fuera: true });
     }
 
-    // Días del mes
-    for (let d = 1; d <= ultimoDia.getDate(); d++) {
-      const fecha = new Date(año, mes, d);
+    for (let j = 1; j <= ultimoDia.getDate(); j++) {
+      const fecha = new Date(año, mes, j);
       const ocupado = this.reservasVivienda.some(r => {
         if (r.estado !== 'CONFIRMADA') return false;
         const ini = new Date(r.fechaInicio);
