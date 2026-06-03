@@ -146,6 +146,7 @@ export class Principal {
           .map(v => v.precioNoche!);
 
         this.filtroPrecioMax = precios.length > 0 ? Math.max(...precios) : 0;
+        this.filtroPrecioMax += 10;
         this.precio = this.filtroPrecioMax
         this.cdr.detectChanges();
       },

@@ -94,6 +94,7 @@ export class DetalleVivienda {
     }
 
     this.diasCalendario = dias;
+    this.cdr.detectChanges();
   }
 
   mesAnterior() {
