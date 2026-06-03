@@ -66,6 +66,7 @@ export class DetalleVivienda {
       next: (datos) => {
         this.reservasVivienda = datos;
         this.generarCalendario();
+        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error al cargar reservas', err)
     });
@@ -94,7 +95,6 @@ export class DetalleVivienda {
     }
 
     this.diasCalendario = dias;
-    this.cdr.detectChanges();
   }
 
   mesAnterior() {

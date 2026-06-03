@@ -145,9 +145,8 @@ export class Principal {
           .filter(v => v.tipo === 'ALQUILER' && v.precioNoche != null)
           .map(v => v.precioNoche!);
 
-        this.filtroPrecioMax = precios.length > 0 ? Math.max(...precios) : 0;
-        this.filtroPrecioMax += 10;
-        this.precio = this.filtroPrecioMax
+        this.filtroPrecioMax = precios.length > 0 ? Math.ceil(Math.max(...precios) / 10) * 10 : 0;
+        this.precio = this.filtroPrecioMax;
         this.cdr.detectChanges();
       },
       error: (err) => console.error('Error al cargar viviendas', err)
